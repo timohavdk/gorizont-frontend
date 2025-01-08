@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import merriweatherFont from "./fonts/merriweather-font";
+import "./setup";
 
 export const metadata: Metadata = {
     title: "Горизонт",
