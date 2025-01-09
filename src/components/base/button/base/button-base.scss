@@ -1,5 +1,17 @@
 .button-base {
-    cursor: pointer;
-    background-color: transparent;
-    border: none;
+	cursor:           pointer;
+	background-color: transparent;
+	border:           none;
+
+	&_sm {
+		padding: 6px 21px;
+	}
+
+	&_md {
+		padding: 13px 42px;
+	}
+
+	&_lg {
+		padding: 26px 73px;
+	}
 }

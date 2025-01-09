@@ -1,5 +1,12 @@
 .button-primary {
-    background-color: var(--gray-light-2);
-    border: 2px solid var(--gray-light-2);
-    border-radius: 10px;
+	transition:       .3s;
+	background-color: var(--gray-light-2);
+	border:           2px solid var(--gray-light-2);
+	border-radius:    10px;
+
+	@media (pointer: fine) {
+		&:hover {
+			border: 2px solid var(--black);
+		}
+	}
 }

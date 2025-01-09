@@ -1,0 +1,23 @@
+.header {
+	display:         flex;
+	align-items:     center;
+	justify-content: center;
+	box-shadow:      0 -20px 40px 4px var(--black);
+	padding:         46px 0;
+
+	&__title {
+		text-decoration: underline;
+	}
+
+	&__link {
+		color: inherit;
+
+		&:visited {
+			color: inherit;
+		}
+
+		&:hover {
+			color: inherit;
+		}
+	}
+}
