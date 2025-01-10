@@ -1,11 +1,17 @@
 @use "src/app/styles/variables" as vars;
 
 .header {
-	display:         flex;
-	align-items:     center;
-	justify-content: space-between;
-	box-shadow:      0 -20px 40px 4px var(--black);
-	padding:         34px;
+	display:          flex;
+	align-items:      center;
+	justify-content:  space-between;
+	box-shadow:       0 -20px 40px 4px var(--black);
+	padding:          34px;
+	background-color: var(--white);
+
+	@media (max-width: vars.$mobile-device-width) {
+		justify-content: center;
+		padding:         14px;
+	}
 
 	&__logo {
 		text-decoration: underline;
