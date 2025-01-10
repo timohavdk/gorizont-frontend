@@ -1,0 +1,16 @@
+@use "src/app/styles/variables" as vars;
+
+.article-preview {
+	border-radius:    var(--block-border-radius);
+	background-color: var(--gray-light);
+	height:           250px;
+	padding:          10px;
+
+	&__title {
+		margin-bottom: 10px;
+	}
+
+	@media (max-width: vars.$mobile-device-width) {
+		height: 150px;
+	}
+}

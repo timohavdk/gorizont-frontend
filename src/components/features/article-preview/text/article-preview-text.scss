@@ -1,0 +1,15 @@
+@use "src/app/styles/variables" as variables;
+
+.article-preview-text {
+	font-size:          16px;
+	color:              var(--black);
+	overflow:           hidden;
+	display:            -webkit-box;
+	-webkit-line-clamp: 8;
+	-webkit-box-orient: vertical;
+
+	@media (max-width: variables.$mobile-device-width) {
+		-webkit-line-clamp: 3;
+		font-size:          14px;
+	}
+}
