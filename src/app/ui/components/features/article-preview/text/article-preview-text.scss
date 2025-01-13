@@ -9,7 +9,7 @@
 	-webkit-box-orient: vertical;
 
 	@media (max-width: variables.$mobile-device-width) {
-		-webkit-line-clamp: 3;
+		-webkit-line-clamp: 6;
 		font-size:          14px;
 	}
 }
