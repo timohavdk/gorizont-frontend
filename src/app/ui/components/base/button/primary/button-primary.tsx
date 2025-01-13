@@ -1,4 +1,4 @@
-import { ButtonBase } from '@/components/base/button/base/button-base';
+import { ButtonBase } from '@/app/ui/components/base/button/base/button-base';
 import React from 'react';
 import './button-primary.scss';
 import { ButtonPrimaryProps } from './props';
