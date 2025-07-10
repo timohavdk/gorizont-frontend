@@ -4,13 +4,12 @@ import { ArticlePreviewText } from '@/app/ui/components/features/article-preview
 import { ArticlePreviewTitle } from '@/app/ui/components/features/article-preview/title/article-preview-title';
 import React, { useContext } from 'react';
 import './article-preview.scss';
-import merriweatherFont from '@/app/fonts/merriweather-font';
 
 export const ArticlePreview: React.FC<ArticlePreviewProps> = ({ className, children, ...props }) => {
     const { title, text } = useContext(ArticlePreviewContext);
 
     return (
-        <article className={`article-preview ${className} ${merriweatherFont.className}`} {...props}>
+        <article className={`article-preview ${className}`} {...props}>
             <ArticlePreviewTitle className={'article-preview__title'}>
                 {title}
             </ArticlePreviewTitle>

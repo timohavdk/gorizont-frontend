@@ -1,6 +1,6 @@
 import { Header } from '@/app/ui/components/layout/header/header';
 import type { Metadata } from "next";
-import merriweatherFont from "./fonts/merriweather-font";
+import interTightFont from "./fonts/inter-tight-font";
 import "./setup";
 import './layout.scss';
 
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children, }: { children: React.ReactNode }) {
     return (
-        <html lang="en" className={merriweatherFont.className}>
+        <html lang="en" className={interTightFont.className}>
             <body>
                 <Header className={'main-layout__header'} />
                 <main className={'main-layout'}>

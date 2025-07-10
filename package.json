@@ -6,11 +6,12 @@
     "dev": "next dev -p 3001",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint:fix": "eslint ./src --fix",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@next/eslint-plugin-next": "^15.3.5",
     "@types/prop-types": "^15.7.14",
     "axios": "^1.7.9",
     "next": "15.3.5",
@@ -21,7 +22,6 @@
     "tsx": "^4.19.2"
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "^4.0.1",
     "@eslint/css": "^0.9.0",
     "@eslint/js": "^9.30.1",
     "@eslint/json": "^0.12.0",
