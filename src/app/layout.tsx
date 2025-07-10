@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import interTightFont from "./fonts/inter-tight-font";
 import "./setup";
 import './layout.scss';
+import { Navigation } from './ui/components/layout/navigation/navigation';
 
 export const metadata: Metadata = {
     title: "Горизонт",
@@ -17,6 +18,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
                 <main className={'main-layout'}>
                     {children}
                 </main>
+                <Navigation className={'main-layout__navigation'} />
             </body>
         </html>
     );
