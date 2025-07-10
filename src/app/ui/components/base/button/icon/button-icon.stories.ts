@@ -1,5 +1,5 @@
 import { ButtonIcon } from '@/app/ui/components/base/button/icon/button-icon';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs';
 
 const meta = {
     title: 'Button/ButtonIcon',
