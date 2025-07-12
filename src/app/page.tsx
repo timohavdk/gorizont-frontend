@@ -1,7 +1,7 @@
 'use client'
 
+import { ArticlesPreviewCatalog } from '@/components/pages/home/articles-preview-catalog/articles-preview-catalog';
 import './page.scss';
-import { ArticlesPreviewCatalog } from '@/app/ui/components/pages/home/articles-preview-catalog/articles-preview-catalog';
 
 export default function Home() {
     return (

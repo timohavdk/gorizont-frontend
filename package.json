@@ -11,6 +11,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@chromatic-com/storybook": "^4.0.1",
     "@next/eslint-plugin-next": "^15.3.5",
     "@types/prop-types": "^15.7.14",
     "axios": "^1.7.9",

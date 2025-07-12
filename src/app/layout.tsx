@@ -1,9 +1,9 @@
-import { Header } from '@/app/ui/components/layout/header/header';
+import { Header } from '@/components/layout/header/header';
 import type { Metadata } from "next";
-import interTightFont from "./fonts/inter-tight-font";
 import "./setup";
 import './layout.scss';
-import { Navigation } from './ui/components/layout/navigation/navigation';
+import { Navigation } from '@/components/layout/navigation/navigation';
+import interTightFont from '@/assets/fonts/inter-tight-font';
 
 export const metadata: Metadata = {
     title: "Горизонт",
@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children, }: { children: React.ReactNode }) {
     return (
-        <html lang="en" className={interTightFont.className}>
-            <body>
+        <html>
+            <body className={interTightFont.className}>
                 <Header className={'main-layout__header'} />
                 <main className={'main-layout'}>
                     {children}
