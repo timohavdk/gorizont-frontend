@@ -1,6 +1,6 @@
 import { Header } from '@/components/layout/header/header';
 import type { Metadata } from "next";
-import "./setup";
+import "../assets/styles/setup";
 import './layout.scss';
 import { Navigation } from '@/components/layout/navigation/navigation';
 import interTightFont from '@/assets/fonts/inter-tight-font';

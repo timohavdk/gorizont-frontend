@@ -1,0 +1,32 @@
+@use "@styles/variables" as *;
+
+.header {
+    margin-bottom: 60px;
+
+    @media (max-width: $mobile-device-width) {
+        margin-bottom: 30px;
+    }
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 900px;
+}
+
+.textarea {
+    min-height: 200px;
+
+    @media (max-width: $mobile-device-width) {
+        min-height: 280px;
+    }
+}
+
+.button {
+    max-width: 180px;
+
+    @media (max-width: $mobile-device-width) {
+        max-width: unset;
+    }
+}
