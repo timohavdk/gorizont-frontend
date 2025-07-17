@@ -2,9 +2,9 @@
 
 .heading {
     color: var(--black);
-    font-size: 48px;
+    font-size: 40px;
 
     @media (max-width: $mobile-device-width) {
-		font-size: 32px;
-	}
+        font-size: 32px;
+    }
 }

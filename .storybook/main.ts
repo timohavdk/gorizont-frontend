@@ -15,18 +15,11 @@ const config: StorybookConfig = {
         name: "@storybook/nextjs",
         options: {},
     },
-    staticDirs: [
-        "..\\public",
-        {
-            from: '../src/app/fonts/Merriweather',
-            to: 'src/components',
-        },
-    ],
     webpackFinal: async (config) => {
         if (config.resolve) {
             config.resolve.alias = {
                 ...config.resolve.alias,
-                '@styles': path.resolve(__dirname, '../src/app/styles'),
+                '@styles': path.resolve(__dirname, '../src/assets/styles'),
             };
         }
         return config;

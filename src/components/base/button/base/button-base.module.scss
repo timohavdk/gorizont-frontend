@@ -1,0 +1,31 @@
+.button-base {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+
+    &_sm {
+        padding: 6px 21px;
+    }
+
+    &_md {
+        padding: 13px 42px;
+    }
+
+    &_lg {
+        padding: 26px 73px;
+    }
+}
+
+.loader {
+    $size: 18px;
+
+    &#{&} {
+        width: $size;
+        height: $size;
+        border-width: 2px;
+    }
+}

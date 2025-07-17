@@ -1,7 +1,7 @@
 import React from 'react';
 import './articles-preview-catalog.scss';
 import { ArticlesPreviewCatalogProps } from './props';
-import useArticlesPreview from '@/hooks/use-articles-preview';
+import useArticlesPreview from '@/hooks/api/articles/use-articles-preview';
 import { ArticlePreviewContext } from '@/components/features/article-preview/context/article-preview-context';
 import { ArticlePreview } from '@/components/features/article-preview/article-preview';
 

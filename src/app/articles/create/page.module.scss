@@ -1,7 +1,7 @@
 @use "@styles/variables" as *;
 
 .header {
-    margin-bottom: 60px;
+    margin-bottom: 40px;
 
     @media (max-width: $mobile-device-width) {
         margin-bottom: 30px;
