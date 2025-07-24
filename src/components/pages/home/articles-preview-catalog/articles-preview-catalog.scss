@@ -1,0 +1,11 @@
+.articles-preview-catalog {
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+
+    &__description {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

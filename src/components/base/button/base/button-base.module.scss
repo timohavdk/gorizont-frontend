@@ -1,0 +1,41 @@
+.button-base {
+    --button-content-height: 16px;
+
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+
+    &_sm {
+        padding: 6px 21px;
+    }
+
+    &_md {
+        --button-content-height: 18px;
+
+        padding: 13px 42px;
+        font-size: 18px;
+    }
+
+    &_lg {
+        --button-content-height: 20px;
+
+        padding: 26px 73px;
+        font-size: 20px;
+    }
+}
+
+.wrapper {
+    height: var(--button-content-height);
+}
+
+.loader {
+    &#{&} {
+        width: var(--button-content-height);
+        height: var(--button-content-height);
+        border-width: 2px;
+    }
+}
