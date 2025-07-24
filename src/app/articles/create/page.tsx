@@ -4,36 +4,20 @@ import { ButtonPrimary } from "@/components/base/button/primary/button-primary";
 import { Input } from "@/components/base/input/input";
 import { Textarea } from "@/components/base/textarea/textarea";
 import { PrimaryHeading } from "@/components/typography/headings/primary-heading/primary-heading";
-import { ChangeEventHandler, useState } from "react";
-import useCreateArticle from "@/hooks/api/articles/use-create-article";
+import useArticleForm from "./use-article-form";
 
 import style from './page.module.scss';
 
 const CreateArticlePage = () => {
-    const [title, setTitle] = useState('');
-    const [text, setText] = useState('');
-    const { trigger } = useCreateArticle();
-
-    const onChangeTitle: ChangeEventHandler<HTMLInputElement> = (event) => {
-        const { value } = event.target as HTMLInputElement;
-
-        setTitle(value);
-    };
-
-    const onChangeText: ChangeEventHandler<HTMLTextAreaElement> = (event) => {
-        const { value } = event.target as HTMLTextAreaElement;
-
-        setText(value);
-    };
-
-    const onButtonClick = () => {
-        console.log(title, text)
-
-        trigger({
-            text,
-            title,
-        });
-    };
+    const {
+        title,
+        text,
+        isMutating,
+        isDisabled,
+        onChangeTitle,
+        onChangeText,
+        onButtonClick,
+    } = useArticleForm();
 
     return (
         <div>
@@ -56,12 +40,13 @@ const CreateArticlePage = () => {
                 />
 
                 <ButtonPrimary
-                    className={`${style.button}`}
                     type="button"
+                    isLoading={isMutating}
+                    disabled={isDisabled}
+                    className={`${style.button}`}
                     onClick={onButtonClick}
                 >
                     Отправить
-
                 </ButtonPrimary>
             </form>
         </div >

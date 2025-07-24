@@ -1,4 +1,6 @@
 .button-base {
+    --button-content-height: 16px;
+
     cursor: pointer;
     background-color: transparent;
     border: none;
@@ -12,20 +14,28 @@
     }
 
     &_md {
+        --button-content-height: 18px;
+
         padding: 13px 42px;
+        font-size: 18px;
     }
 
     &_lg {
+        --button-content-height: 20px;
+
         padding: 26px 73px;
+        font-size: 20px;
     }
 }
 
-.loader {
-    $size: 18px;
+.wrapper {
+    height: var(--button-content-height);
+}
 
+.loader {
     &#{&} {
-        width: $size;
-        height: $size;
+        width: var(--button-content-height);
+        height: var(--button-content-height);
         border-width: 2px;
     }
 }
