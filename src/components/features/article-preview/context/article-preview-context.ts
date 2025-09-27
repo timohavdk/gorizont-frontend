@@ -1,18 +1,15 @@
-import {createContext} from 'react';
+import { createContext } from 'react';
 
 export type ArticlePreviewType = {
-	id: string;
-	title: string;
-	text: string;
-	created_at: string;
-	updated_at: string;
-	deletedDate: string | null;
+    id: string;
+    title: string;
+    text: string;
+    image: string;
+
 }
 export const ArticlePreviewContext = createContext<ArticlePreviewType>({
-	id:          "",
-	title:       "",
-	text:        "",
-	created_at:  "",
-	updated_at:  "",
-	deletedDate: null
+    id: "",
+    title: "",
+    text: "",
+    image: '',
 });

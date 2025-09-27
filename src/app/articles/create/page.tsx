@@ -4,11 +4,16 @@ import { ButtonPrimary } from "@/components/base/button/primary/button-primary";
 import { Input } from "@/components/base/input/input";
 import { Textarea } from "@/components/base/textarea/textarea";
 import { PrimaryHeading } from "@/components/typography/headings/primary-heading/primary-heading";
+import { FileInput } from "@/components/base/file-input/file-input";
 import useArticleForm from "./use-article-form";
 
 import style from './page.module.scss';
+import useFileInput from "./use-file-input";
+import { FilePreview } from "@/components/base/file-input/file-preview/file-preview";
 
 const CreateArticlePage = () => {
+    const { file, onSelect, onDelete } = useFileInput();
+
     const {
         title,
         text,
@@ -17,7 +22,7 @@ const CreateArticlePage = () => {
         onChangeTitle,
         onChangeText,
         onButtonClick,
-    } = useArticleForm();
+    } = useArticleForm(file);
 
     return (
         <div>
@@ -38,6 +43,15 @@ const CreateArticlePage = () => {
                     value={text}
                     onChange={onChangeText}
                 />
+
+                <FileInput
+                    label="Добавьте изображение"
+                    mimeTypes={['image/*']}
+                    onSelectFile={onSelect}
+                    className={style['file-input']}
+                />
+
+                {file && <FilePreview file={file} onDelete={onDelete} />}
 
                 <ButtonPrimary
                     type="button"
