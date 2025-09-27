@@ -26,6 +26,10 @@
         padding: 26px 73px;
         font-size: 20px;
     }
+
+    &:disabled {
+        cursor: auto;
+    }
 }
 
 .wrapper {

@@ -1,0 +1,30 @@
+.button {
+    background-color: var(--gray-100);
+    border-radius: var(--block-border-radius-8px);
+    border: 1px solid var(--gray-300);
+    transition: .2s background-color;
+    font-size: inherit;
+    padding: 9px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--text-primary);
+
+    &:hover {
+        background-color: var(--gray-200);
+    }
+
+    &:focus-visible {
+        outline: 1px solid var(--black);
+    }
+}
+
+.icon {
+    path {
+        fill: var(--icon-primary);
+    }
+}
+
+.input {
+    display: none;
+}
