@@ -7,25 +7,27 @@ import styles from './file-input.module.scss';
 
 export const FileInput: React.FC<FileInputProps> = ({
     children,
-    onSelectFile,
+    onChange,
     className,
     label,
     id,
     maxFileSize = 1024 * 1024,
     maxFilesCount = 1,
     mimeTypes = [],
+    value,
+    ref,
     ...props
 }) => {
-    const input = useRef<HTMLInputElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
     const isMultiple = maxFilesCount > 1;
     const accept = mimeTypes.join(', ');
 
     const onClick = () => {
-        if (!input.current) {
+        if (!inputRef.current) {
             return;
         }
 
-        input.current.click();
+        inputRef.current.click();
     };
 
     const onInput = (event: ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +37,7 @@ export const FileInput: React.FC<FileInputProps> = ({
             return;
         }
 
-        onSelectFile(files);
+        onChange(files);
     };
 
     return (
@@ -54,13 +56,22 @@ export const FileInput: React.FC<FileInputProps> = ({
             />
             <input
                 type='file'
-                ref={input}
+                ref={ref}
                 multiple={isMultiple}
                 accept={accept}
                 id={id}
+                ref={(el) => {
+                    inputRef.current = el;
+                    if (typeof ref === 'function') {
+                        ref(el);
+                    } else if (ref) {
+                        (ref as React.MutableRefObject<HTMLInputElement | null>).current =
+                            el;
+                    }
+                }}
                 className={styles.input}
-                {...props}
                 onChange={onInput}
+                {...props}
             />
         </button>
     );

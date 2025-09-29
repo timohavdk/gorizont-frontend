@@ -7,22 +7,21 @@ import { PrimaryHeading } from "@/components/typography/headings/primary-heading
 import { FileInput } from "@/components/base/file-input/file-input";
 import useArticleForm from "./use-article-form";
 
-import style from './page.module.scss';
-import useFileInput from "./use-file-input";
 import { FilePreview } from "@/components/base/file-input/file-preview/file-preview";
+import { Controller } from "react-hook-form";
+
+import style from './page.module.scss';
 
 const CreateArticlePage = () => {
-    const { file, onSelect, onDelete } = useFileInput();
-
     const {
-        title,
-        text,
+        file,
         isMutating,
-        isDisabled,
-        onChangeTitle,
-        onChangeText,
         onButtonClick,
-    } = useArticleForm(file);
+        control,
+        handleSubmit,
+        register,
+        onDelete,
+    } = useArticleForm();
 
     return (
         <div>
@@ -33,22 +32,26 @@ const CreateArticlePage = () => {
                 <Input
                     id="title"
                     label="Заголовок"
-                    value={title}
-                    onChange={onChangeTitle}
+                    {...register('title')}
                 />
                 <Textarea
                     id="text"
                     label="Текст"
                     className={`${style.textarea}`}
-                    value={text}
-                    onChange={onChangeText}
+                    {...register('text')}
                 />
 
-                <FileInput
-                    label="Добавьте изображение"
-                    mimeTypes={['image/*']}
-                    onSelectFile={onSelect}
-                    className={style['file-input']}
+                <Controller
+                    name="files"
+                    control={control}
+                    render={({ field }) => (
+                        <FileInput
+                            label="Добавьте изображение"
+                            mimeTypes={['image/*']}
+                            className={style['file-input']}
+                            {...field}
+                        />
+                    )}
                 />
 
                 {file && <FilePreview file={file} onDelete={onDelete} />}
@@ -56,9 +59,8 @@ const CreateArticlePage = () => {
                 <ButtonPrimary
                     type="button"
                     isLoading={isMutating}
-                    disabled={isDisabled}
                     className={`${style.button}`}
-                    onClick={onButtonClick}
+                    onClick={handleSubmit(onButtonClick)}
                 >
                     Отправить
                 </ButtonPrimary>

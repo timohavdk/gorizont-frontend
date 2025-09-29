@@ -1,34 +1,48 @@
 import useCreateArticle from "@/hooks/api/articles/use-create-article";
 import { redirect, RedirectType } from "next/navigation";
-import { ChangeEventHandler, useState } from "react";
+import z from 'zod';
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-const useArticleForm = (file: File) => {
-    const [title, setTitle] = useState('');
-    const [text, setText] = useState('');
+const schema = z.object({
+    title: z.string(),
+    text: z.string(),
+    files: z.file().array(),
+});
+
+type Article = z.infer<typeof schema>;
+
+const useArticleForm = () => {
     const { trigger, isMutating } = useCreateArticle();
 
-    const isDisabled = isMutating || !title || !text || !file;
+    const {
+        control,
+        watch,
+        handleSubmit,
+        setValue,
+        register,
+    } = useForm<Article>({
+        resolver: zodResolver(schema),
+    });
 
-    const onChangeTitle: ChangeEventHandler<HTMLInputElement> = (event) => {
-        const { value } = event.target as HTMLInputElement;
+    const files = watch('files');
 
-        setTitle(value);
-    };
+    const file = !!files?.length ? files[0] : null;
 
-    const onChangeText: ChangeEventHandler<HTMLTextAreaElement> = (event) => {
-        const { value } = event.target as HTMLTextAreaElement;
+    const onDelete = () => {
+        setValue('files', []);
+    }
 
-        setText(value);
-    };
+    const onButtonClick = async (data: Article) => {
+        const formData = new FormData();
 
-    const onButtonClick = async () => {
-        const data = new FormData();
+        const { text, title } = data;
 
-        data.append('text', text)
-        data.append('title', title)
-        data.append('file', file)
+        formData.append('text', text)
+        formData.append('title', title)
+        formData.append('file', file)
 
-        const result = await trigger(data);
+        const result = await trigger(formData);
 
         if (!result.result) {
             return;
@@ -38,13 +52,14 @@ const useArticleForm = (file: File) => {
     };
 
     return {
-        title,
-        text,
+        file,
         isMutating,
-        isDisabled,
-        onChangeTitle,
-        onChangeText,
         onButtonClick,
+        control,
+        watch,
+        handleSubmit,
+        register,
+        onDelete,
     }
 };
 
