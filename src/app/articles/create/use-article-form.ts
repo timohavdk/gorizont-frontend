@@ -1,8 +1,8 @@
-import useCreateArticle from "@/hooks/api/articles/use-create-article";
-import { redirect, RedirectType } from "next/navigation";
+import useCreateArticle from '@/hooks/api/articles/use-create-article';
+import { redirect, RedirectType } from 'next/navigation';
 import z from 'zod';
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 const schema = z.object({
     title: z.string(),
@@ -27,20 +27,20 @@ const useArticleForm = () => {
 
     const files = watch('files');
 
-    const file = !!files?.length ? files[0] : null;
+    const file = files?.length ? files[0] : null;
 
     const onDelete = () => {
         setValue('files', []);
-    }
+    };
 
     const onButtonClick = async (data: Article) => {
         const formData = new FormData();
 
         const { text, title } = data;
 
-        formData.append('text', text)
-        formData.append('title', title)
-        formData.append('file', file)
+        formData.append('text', text);
+        formData.append('title', title);
+        formData.append('file', file);
 
         const result = await trigger(formData);
 
@@ -60,7 +60,7 @@ const useArticleForm = () => {
         handleSubmit,
         register,
         onDelete,
-    }
+    };
 };
 
 export default useArticleForm;

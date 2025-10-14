@@ -8,7 +8,7 @@ import { CreateArticleLink } from '@/components/features/navigation/create-artic
 export const Navigation: React.FC<NavigationProps> = ({ className, ...props }) => (
     <nav className={`navigation ${className}`} {...props}>
         <CreateArticleLink>
-            <ButtonIcon size='sm'>
+            <ButtonIcon size="sm">
                 <IconPlus />
             </ButtonIcon>
         </CreateArticleLink>

@@ -12,7 +12,7 @@ const meta = {
         label: {
             defaultValue: 'FileInput Label',
             control: 'text',
-        }
+        },
     },
 } satisfies Meta<typeof FileInput>;
 

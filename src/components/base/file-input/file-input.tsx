@@ -1,20 +1,17 @@
 import React, { ChangeEvent, useRef } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FileInputProps } from './props';
 
 import styles from './file-input.module.scss';
 
 export const FileInput: React.FC<FileInputProps> = ({
-    children,
     onChange,
     className,
     label,
     id,
-    maxFileSize = 1024 * 1024,
     maxFilesCount = 1,
     mimeTypes = [],
-    value,
     ref,
     ...props
 }) => {
@@ -37,12 +34,13 @@ export const FileInput: React.FC<FileInputProps> = ({
             return;
         }
 
+        // @todo Исправить ошибку при повторном воде файла
         onChange(files);
     };
 
     return (
         <button
-            type='button'
+            type="button"
             className={`${styles.button} ${className}`}
             onClick={onClick}
         >
@@ -52,11 +50,10 @@ export const FileInput: React.FC<FileInputProps> = ({
             <FontAwesomeIcon
                 icon={faPlus}
                 className={styles.icon}
-                size={'sm'}
+                size="sm"
             />
             <input
-                type='file'
-                ref={ref}
+                type="file"
                 multiple={isMultiple}
                 accept={accept}
                 id={id}
@@ -64,9 +61,10 @@ export const FileInput: React.FC<FileInputProps> = ({
                     inputRef.current = el;
                     if (typeof ref === 'function') {
                         ref(el);
-                    } else if (ref) {
-                        (ref as React.MutableRefObject<HTMLInputElement | null>).current =
-                            el;
+                    }
+                    else if (ref) {
+                        (ref as React.MutableRefObject<HTMLInputElement | null>).current
+                            = el;
                     }
                 }}
                 className={styles.input}

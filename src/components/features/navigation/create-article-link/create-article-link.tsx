@@ -4,8 +4,8 @@ import Link from 'next/link';
 
 export const CreateArticleLink: React.FC<CreateArticleLinkProps> = ({ children, className, ...props }) => {
     return (
-        <Link {...props} href="/articles/create" className={className} >
+        <Link {...props} href="/articles/create" className={className}>
             {children}
         </Link>
     );
-}
+};

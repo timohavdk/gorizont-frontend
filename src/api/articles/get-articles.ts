@@ -1,4 +1,4 @@
-import apiClient from "../api-client";
+import apiClient from '../api-client';
 
 type Article = {
     id: string;
@@ -7,12 +7,12 @@ type Article = {
     created_at: string;
     updated_at: string;
     deletedDate: string;
-}
+};
 
 const getArticles = async (url: string) => {
     const result = await apiClient.get<Article[]>(url);
 
     return result.data;
-}
+};
 
 export default getArticles;

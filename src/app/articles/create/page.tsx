@@ -1,14 +1,14 @@
-"use client"
+'use client';
 
-import { ButtonPrimary } from "@/components/base/button/primary/button-primary";
-import { Input } from "@/components/base/input/input";
-import { Textarea } from "@/components/base/textarea/textarea";
-import { PrimaryHeading } from "@/components/typography/headings/primary-heading/primary-heading";
-import { FileInput } from "@/components/base/file-input/file-input";
-import useArticleForm from "./use-article-form";
+import { ButtonPrimary } from '@/components/base/button/primary/button-primary';
+import { Input } from '@/components/base/input/input';
+import { Textarea } from '@/components/base/textarea/textarea';
+import { PrimaryHeading } from '@/components/typography/headings/primary-heading/primary-heading';
+import { FileInput } from '@/components/base/file-input/file-input';
+import useArticleForm from './use-article-form';
 
-import { FilePreview } from "@/components/base/file-input/file-preview/file-preview";
-import { Controller } from "react-hook-form";
+import { FilePreview } from '@/components/base/file-input/file-preview/file-preview';
+import { Controller } from 'react-hook-form';
 
 import style from './page.module.scss';
 
@@ -65,7 +65,7 @@ const CreateArticlePage = () => {
                     Отправить
                 </ButtonPrimary>
             </form>
-        </div >
+        </div>
     );
 };
 

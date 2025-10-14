@@ -11,7 +11,7 @@ const meta = {
     argTypes: {
         size: {
             options: ['sm', 'md', 'lg'],
-        }
+        },
     },
 } satisfies Meta<typeof ButtonIcon>;
 

@@ -10,6 +10,6 @@ export const ButtonPrimary: React.FC<ButtonPrimaryProps> = ({ children, classNam
             {...props}
         >
             {children}
-        </ButtonBase >
+        </ButtonBase>
     );
 };

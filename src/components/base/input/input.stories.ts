@@ -12,7 +12,7 @@ const meta = {
         label: {
             defaultValue: 'Input Label',
             control: 'text',
-        }
+        },
     },
 } satisfies Meta<typeof Input>;
 
@@ -23,6 +23,6 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
     args: {
         label: 'Input Label',
-        id: 'test'
+        id: 'test',
     },
 };
