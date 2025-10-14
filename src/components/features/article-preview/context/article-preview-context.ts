@@ -6,10 +6,10 @@ export type ArticlePreviewType = {
     text: string;
     image: string;
 
-}
+};
 export const ArticlePreviewContext = createContext<ArticlePreviewType>({
-    id: "",
-    title: "",
-    text: "",
+    id: '',
+    title: '',
+    text: '',
     image: '',
 });

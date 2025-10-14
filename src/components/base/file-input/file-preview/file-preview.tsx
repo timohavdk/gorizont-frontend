@@ -1,8 +1,9 @@
 import React from 'react';
 import { Props } from './type';
 import useFilePreview from './use-file-preview';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFile, faXmark } from '@fortawesome/free-solid-svg-icons';
+import Image from 'next/image';
 
 import styles from './file-preview.module.scss';
 import getFormatedFileSize from './get-formated-file-size';
@@ -17,19 +18,19 @@ export const FilePreview: React.FC<Props> = ({ file, className, onDelete, ...pro
 
     const fileIcon = (
         <span className={styles.icon}>
-            <FontAwesomeIcon icon={faFile} size='xl' />
+            <FontAwesomeIcon icon={faFile} size="xl" />
         </span>
     );
 
     const filePreview = (
-        previewUrl ? <img className={styles.icon} src={previewUrl ?? '/'} /> : <></>
+        previewUrl ? <Image className={styles.icon} src={previewUrl ?? '/'} width={100} height={100} alt="Превью" /> : <></>
     );
 
     const size = getFormatedFileSize(file.size);
 
     const onDeleteClick = () => {
-        onDelete(file)
-    }
+        onDelete(file);
+    };
 
     return (
         <div className={rootClass} {...props}>
@@ -37,12 +38,12 @@ export const FilePreview: React.FC<Props> = ({ file, className, onDelete, ...pro
                 {isImage ? filePreview : fileIcon}
                 <p className={styles.info}>
                     <PrimaryText
-                        tag={'span'}
+                        tag="span"
                         className={styles.name}
                     >
                         {file.name}
                     </PrimaryText>
-                    <SecondaryText tag={'span'}>
+                    <SecondaryText tag="span">
                         {size}
                     </SecondaryText>
                 </p>
@@ -50,6 +51,6 @@ export const FilePreview: React.FC<Props> = ({ file, className, onDelete, ...pro
             <button className={styles.close} onClick={onDeleteClick}>
                 <FontAwesomeIcon icon={faXmark} />
             </button>
-        </div >
+        </div>
     );
 };

@@ -6,4 +6,4 @@ export const ButtonIcon: React.FC<ButtonIconProps> = ({ children, size = 'md', c
     return (
         <button type="button" className={`button-icon button-icon_${size} ${className}`} {...props}>{children}</button>
     );
-}
+};

@@ -1,6 +1,6 @@
 import { ArticlePreviewTitleProps } from '@/components/features/article-preview/title/props';
 import React from 'react';
-import './article-preview-title.scss'
+import './article-preview-title.scss';
 
 export const ArticlePreviewTitle: React.FC<ArticlePreviewTitleProps> = ({ children, className, ...props }) => {
     return (

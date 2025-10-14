@@ -1,6 +1,6 @@
-import { ComponentPropsWithoutRef, ElementType } from "react";
+import { ComponentPropsWithoutRef, ElementType } from 'react';
 
-export type Props<TTag extends ElementType = "p"> = {
+export type Props<TTag extends ElementType = 'p'> = {
     tag?: TTag;
     className?: string;
     children?: React.ReactNode;

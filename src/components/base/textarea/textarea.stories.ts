@@ -12,7 +12,7 @@ const meta = {
         label: {
             defaultValue: 'Textarea Label',
             control: 'text',
-        }
+        },
     },
 } satisfies Meta<typeof Textarea>;
 
@@ -23,6 +23,6 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
     args: {
         label: 'Textarea Label',
-        id: 'test'
+        id: 'test',
     },
 };

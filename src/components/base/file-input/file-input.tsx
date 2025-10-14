@@ -1,31 +1,30 @@
 import React, { ChangeEvent, useRef } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FileInputProps } from './props';
 
 import styles from './file-input.module.scss';
 
 export const FileInput: React.FC<FileInputProps> = ({
-    children,
-    onSelectFile,
+    onChange,
     className,
     label,
     id,
-    maxFileSize = 1024 * 1024,
     maxFilesCount = 1,
     mimeTypes = [],
+    ref,
     ...props
 }) => {
-    const input = useRef<HTMLInputElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
     const isMultiple = maxFilesCount > 1;
     const accept = mimeTypes.join(', ');
 
     const onClick = () => {
-        if (!input.current) {
+        if (!inputRef.current) {
             return;
         }
 
-        input.current.click();
+        inputRef.current.click();
     };
 
     const onInput = (event: ChangeEvent<HTMLInputElement>) => {
@@ -35,12 +34,13 @@ export const FileInput: React.FC<FileInputProps> = ({
             return;
         }
 
-        onSelectFile(files);
+        // @todo Исправить ошибку при повторном воде файла
+        onChange(files);
     };
 
     return (
         <button
-            type='button'
+            type="button"
             className={`${styles.button} ${className}`}
             onClick={onClick}
         >
@@ -50,17 +50,26 @@ export const FileInput: React.FC<FileInputProps> = ({
             <FontAwesomeIcon
                 icon={faPlus}
                 className={styles.icon}
-                size={'sm'}
+                size="sm"
             />
             <input
-                type='file'
-                ref={input}
+                type="file"
                 multiple={isMultiple}
                 accept={accept}
                 id={id}
+                ref={(el) => {
+                    inputRef.current = el;
+                    if (typeof ref === 'function') {
+                        ref(el);
+                    }
+                    else if (ref) {
+                        (ref as React.MutableRefObject<HTMLInputElement | null>).current
+                            = el;
+                    }
+                }}
                 className={styles.input}
-                {...props}
                 onChange={onInput}
+                {...props}
             />
         </button>
     );
