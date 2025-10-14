@@ -1,12 +1,10 @@
 import apiClient from '../api-client';
 
-type Article = {
+export type Article = {
     id: string;
     title: string;
     text: string;
-    created_at: string;
-    updated_at: string;
-    deletedDate: string;
+    image: string;
 };
 
 const getArticles = async (url: string) => {

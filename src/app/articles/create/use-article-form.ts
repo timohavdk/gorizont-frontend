@@ -1,8 +1,8 @@
-import useCreateArticle from '@/hooks/api/articles/use-create-article';
-import { redirect, RedirectType } from 'next/navigation';
 import z from 'zod';
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { redirect, RedirectType } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import useCreateArticle from '@/hooks/api/articles/use-create-article';
 
 const schema = z.object({
     title: z.string(),

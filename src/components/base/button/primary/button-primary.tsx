@@ -1,7 +1,8 @@
-import { ButtonBase } from '@/components/base/button/base/button-base';
 import React from 'react';
-import './button-primary.scss';
+import { ButtonBase } from '@/components/base/button/base/button-base';
 import { ButtonPrimaryProps } from './props';
+
+import './button-primary.scss';
 
 export const ButtonPrimary: React.FC<ButtonPrimaryProps> = ({ children, className, ...props }) => {
     return (

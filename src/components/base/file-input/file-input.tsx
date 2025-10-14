@@ -1,9 +1,8 @@
 import React, { ChangeEvent, useRef } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { FileInputProps } from './props';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './file-input.module.scss';
+import { FileInputProps } from './props';
 
 export const FileInput: React.FC<FileInputProps> = ({
     onChange,

@@ -1,7 +1,7 @@
 import React from 'react';
+import { Loader } from '@/components/icons/loader/loader';
 import style from './button-base.module.scss';
 import { BUTTON_SIZES, ButtonBaseProps } from './props';
-import { Loader } from '@/components/icons/loader/loader';
 
 export const ButtonBase: React.FC<ButtonBaseProps> = ({ children, className, isLoading = false, size = BUTTON_SIZES.md, ...props }) => {
     const sizeClass = `button-base_${size}`;

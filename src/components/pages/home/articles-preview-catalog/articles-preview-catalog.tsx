@@ -1,9 +1,10 @@
 import React from 'react';
-import './articles-preview-catalog.scss';
-import { ArticlesPreviewCatalogProps } from './props';
-import useArticlesPreview from '@/hooks/api/articles/use-articles-preview';
-import { ArticlePreviewContext } from '@/components/features/article-preview/context/article-preview-context';
 import { ArticlePreview } from '@/components/features/article-preview/article-preview';
+import { ArticlePreviewContext } from '@/components/features/article-preview/context/article-preview-context';
+import useArticlesPreview from '@/hooks/api/articles/use-articles-preview';
+import { ArticlesPreviewCatalogProps } from './props';
+
+import './articles-preview-catalog.scss';
 
 export const ArticlesPreviewCatalog: React.FC<ArticlesPreviewCatalogProps> = (props) => {
     const { data, isLoading } = useArticlesPreview();

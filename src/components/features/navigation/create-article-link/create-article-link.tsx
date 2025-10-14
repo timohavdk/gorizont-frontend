@@ -1,6 +1,6 @@
 import React from 'react';
-import { CreateArticleLinkProps } from './props';
 import Link from 'next/link';
+import { CreateArticleLinkProps } from './props';
 
 export const CreateArticleLink: React.FC<CreateArticleLinkProps> = ({ children, className, ...props }) => {
     return (

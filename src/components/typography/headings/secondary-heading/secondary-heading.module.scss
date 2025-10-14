@@ -1,0 +1,11 @@
+@use "@styles/variables" as *;
+
+.heading {
+    color: var(--black);
+    font-size: 24px;
+	font-weight: 700;
+
+    @media (max-width: $mobile-device-width) {
+        font-size: 20px;
+    }
+}

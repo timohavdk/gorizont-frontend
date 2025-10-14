@@ -1,14 +1,14 @@
 import React from 'react';
-import { Props } from './type';
-import useFilePreview from './use-file-preview';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFile, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from 'next/image';
 
-import styles from './file-preview.module.scss';
-import getFormatedFileSize from './get-formated-file-size';
 import { PrimaryText } from '@/components/typography/text/primary-text/primary-text';
 import { SecondaryText } from '@/components/typography/text/secondary-text/secondary-text';
+import styles from './file-preview.module.scss';
+import getFormatedFileSize from './get-formated-file-size';
+import { Props } from './type';
+import useFilePreview from './use-file-preview';
 
 export const FilePreview: React.FC<Props> = ({ file, className, onDelete, ...props }) => {
     const rootClass = `${styles.file} ${className}`;

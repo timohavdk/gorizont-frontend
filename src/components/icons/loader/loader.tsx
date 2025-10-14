@@ -1,6 +1,5 @@
-import { LoaderProps } from './props';
-
 import style from './loader.module.scss';
+import { LoaderProps } from './props';
 
 export const Loader: React.FC<LoaderProps> = ({ className, ...props }) => {
     return (

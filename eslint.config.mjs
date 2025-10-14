@@ -1,13 +1,14 @@
+import css from '@eslint/css';
+import { FlatCompat } from '@eslint/eslintrc';
 import js from '@eslint/js';
-import globals from 'globals';
-import tseslint from 'typescript-eslint';
-import pluginReact from 'eslint-plugin-react';
 import json from '@eslint/json';
 import markdown from '@eslint/markdown';
-import css from '@eslint/css';
-import { defineConfig } from 'eslint/config';
-import { FlatCompat } from '@eslint/eslintrc';
 import stylistic from '@stylistic/eslint-plugin';
+import { defineConfig } from 'eslint/config';
+import importPlugin from 'eslint-plugin-import';
+import pluginReact from 'eslint-plugin-react';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
 
 const compat = new FlatCompat({
     baseDirectory: import.meta.dirname,
@@ -68,9 +69,46 @@ export default defineConfig([
         commaDangle: 'always-multiline',
     }),
     {
+        plugins: {
+            import: importPlugin,
+        },
         rules: {
             'react/react-in-jsx-scope': 'off',
             'react/prop-types': 'off',
+            'import/order': [
+                'error',
+                {
+                    groups: [
+                        'builtin',
+                        'external',
+                        'internal',
+                        'parent',
+                        'sibling',
+                        'index',
+                    ],
+                    pathGroups: [
+                        {
+                            pattern: '{react,zod,swr}',
+                            group: 'external',
+                            position: 'before',
+                        },
+                        {
+                            pattern: '@/**',
+                            group: 'internal',
+                            position: 'after',
+                        },
+                        {
+                            pattern: '*.+(css|scss)',
+                            group: 'index',
+                            position: 'after',
+                        },
+                    ],
+                    pathGroupsExcludedImportTypes: ['builtin'],
+                    alphabetize: {
+                        order: 'asc',
+                    },
+                },
+            ],
         },
     },
 ]);

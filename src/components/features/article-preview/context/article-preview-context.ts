@@ -1,13 +1,7 @@
 import { createContext } from 'react';
+import { Article } from '@/api/articles/get-articles';
 
-export type ArticlePreviewType = {
-    id: string;
-    title: string;
-    text: string;
-    image: string;
-
-};
-export const ArticlePreviewContext = createContext<ArticlePreviewType>({
+export const ArticlePreviewContext = createContext<Article>({
     id: '',
     title: '',
     text: '',

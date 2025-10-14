@@ -1,7 +1,7 @@
-import { Header } from '@/components/layout/header/header';
 import type { Metadata } from 'next';
-import { Navigation } from '@/components/layout/navigation/navigation';
 import interTightFont from '@/assets/fonts/inter-tight-font';
+import { Header } from '@/components/layout/header/header';
+import { Navigation } from '@/components/layout/navigation/navigation';
 
 import '../assets/styles/setup';
 import style from './layout.module.scss';

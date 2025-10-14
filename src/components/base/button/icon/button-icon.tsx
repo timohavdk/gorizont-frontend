@@ -1,5 +1,5 @@
-import { ButtonIconProps } from '@/components/base/button/icon/props';
 import React from 'react';
+import { ButtonIconProps } from '@/components/base/button/icon/props';
 import './button-icon.scss';
 
 export const ButtonIcon: React.FC<ButtonIconProps> = ({ children, size = 'md', className, ...props }) => {
