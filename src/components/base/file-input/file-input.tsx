@@ -12,6 +12,7 @@ export const FileInput: React.FC<FileInputProps> = ({
     maxFilesCount = 1,
     mimeTypes = [],
     ref,
+    value,
     ...props
 }) => {
     const inputRef = useRef<HTMLInputElement>(null);
@@ -58,16 +59,14 @@ export const FileInput: React.FC<FileInputProps> = ({
                 id={id}
                 ref={(el) => {
                     inputRef.current = el;
+
                     if (typeof ref === 'function') {
                         ref(el);
-                    }
-                    else if (ref) {
-                        (ref as React.MutableRefObject<HTMLInputElement | null>).current
-                            = el;
                     }
                 }}
                 className={styles.input}
                 onChange={onInput}
+                value={value}
                 {...props}
             />
         </button>

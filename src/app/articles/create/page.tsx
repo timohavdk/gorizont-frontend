@@ -48,6 +48,7 @@ const CreateArticlePage = () => {
                             mimeTypes={['image/*']}
                             className={style['file-input']}
                             {...field}
+                            value=""
                         />
                     )}
                 />

@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { ArticlePreviewContext } from '@/components/features/article-preview/context/article-preview-context';
 import { ArticlePreviewProps } from '@/components/features/article-preview/props';
 import { SecondaryHeading } from '@/components/typography/headings/secondary-heading/secondary-heading';
@@ -8,7 +9,9 @@ import { PrimaryText } from '@/components/typography/text/primary-text/primary-t
 import styles from './article-preview.module.scss';
 
 export const ArticlePreview: React.FC<ArticlePreviewProps> = ({ className, ...props }) => {
-    const { title, text, image } = useContext(ArticlePreviewContext);
+    const { title, text, image, id } = useContext(ArticlePreviewContext);
+
+    const link = `/articles/${id}`;
 
     return (
         <article className={`${styles.preview} ${className}`} {...props}>
@@ -20,9 +23,12 @@ export const ArticlePreview: React.FC<ArticlePreviewProps> = ({ className, ...pr
                 height={200}
             />
             <div className={styles.container}>
-                <SecondaryHeading className={styles.title}>
-                    {title}
-                </SecondaryHeading>
+                <Link href={link}>
+                    <SecondaryHeading className={styles.title}>
+                        {title}
+                    </SecondaryHeading>
+                </Link>
+
                 <PrimaryText>
                     {text}
                 </PrimaryText>

@@ -1,9 +1,9 @@
 import useSWRMutation from 'swr/mutation';
-import { URL_ARTICLES } from '@/api/articles/constants';
+import { ENDPOINT_ARTICLES } from '@/api/articles/constants';
 import createArticle from '@/api/articles/create-article';
 
 const useCreateArticle = () => {
-    const mutation = useSWRMutation(URL_ARTICLES, createArticle);
+    const mutation = useSWRMutation(ENDPOINT_ARTICLES, createArticle);
 
     return mutation;
 };

@@ -1,5 +1,3 @@
-'use client';
-
 import { ArticlesPreviewCatalog } from '@/components/pages/home/articles-preview-catalog/articles-preview-catalog';
 import './page.scss';
 

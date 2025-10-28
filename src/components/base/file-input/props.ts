@@ -8,5 +8,4 @@ export type FileInputProps = ComponentProps<'input'> & {
     maxFileSize?: number;
     onChange: (files: FileList) => void;
     onBlur: () => void;
-    value: File[];
 };

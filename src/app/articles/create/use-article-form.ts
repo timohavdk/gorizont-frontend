@@ -1,6 +1,5 @@
 import z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { redirect, RedirectType } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import useCreateArticle from '@/hooks/api/articles/use-create-article';
 
@@ -27,6 +26,8 @@ const useArticleForm = () => {
 
     const files = watch('files');
 
+    console.log('files', files);
+
     const file = files?.length ? files[0] : null;
 
     const onDelete = () => {
@@ -36,19 +37,27 @@ const useArticleForm = () => {
     const onButtonClick = async (data: Article) => {
         const formData = new FormData();
 
+        console.log('data');
+
         const { text, title } = data;
+
+        if (!file) {
+            return;
+        }
 
         formData.append('text', text);
         formData.append('title', title);
         formData.append('file', file);
 
-        const result = await trigger(formData);
+        console.log('data', formData);
 
-        if (!result.result) {
-            return;
-        }
+        // const result = await trigger(formData);
 
-        redirect('/', RedirectType.push);
+        // if (!result.result) {
+        //     return;
+        // }
+
+        // redirect('/', RedirectType.push);
     };
 
     return {
