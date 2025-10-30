@@ -6,6 +6,6 @@ export type FileInputProps = ComponentProps<'input'> & {
     maxFilesCount?: number;
     mimeTypes?: string[];
     maxFileSize?: number;
-    onChange: (files: FileList) => void;
+    onChange: (files: File[]) => void;
     onBlur: () => void;
 };

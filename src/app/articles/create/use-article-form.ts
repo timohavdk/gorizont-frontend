@@ -1,5 +1,6 @@
 import z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { redirect, RedirectType } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import useCreateArticle from '@/hooks/api/articles/use-create-article';
 
@@ -20,13 +21,12 @@ const useArticleForm = () => {
         handleSubmit,
         setValue,
         register,
+        formState: { errors },
     } = useForm<Article>({
         resolver: zodResolver(schema),
     });
 
     const files = watch('files');
-
-    console.log('files', files);
 
     const file = files?.length ? files[0] : null;
 
@@ -34,10 +34,8 @@ const useArticleForm = () => {
         setValue('files', []);
     };
 
-    const onButtonClick = async (data: Article) => {
+    const onSubmit = async (data: Article) => {
         const formData = new FormData();
-
-        console.log('data');
 
         const { text, title } = data;
 
@@ -49,21 +47,20 @@ const useArticleForm = () => {
         formData.append('title', title);
         formData.append('file', file);
 
-        console.log('data', formData);
+        const result = await trigger(formData);
 
-        // const result = await trigger(formData);
+        if (!result.result) {
+            return;
+        }
 
-        // if (!result.result) {
-        //     return;
-        // }
-
-        // redirect('/', RedirectType.push);
+        redirect('/', RedirectType.push);
     };
 
     return {
+        errors,
         file,
         isMutating,
-        onButtonClick,
+        onSubmit,
         control,
         watch,
         handleSubmit,

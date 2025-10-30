@@ -15,13 +15,15 @@ export const ArticlePreview: React.FC<ArticlePreviewProps> = ({ className, ...pr
 
     return (
         <article className={`${styles.preview} ${className}`} {...props}>
-            <Image
-                className={styles.image}
-                src={image}
-                alt={text}
-                width={200}
-                height={200}
-            />
+            {image && (
+                <Image
+                    className={styles.image}
+                    src={image}
+                    alt={text}
+                    width={200}
+                    height={200}
+                />
+            )}
             <div className={styles.container}>
                 <Link href={link}>
                     <SecondaryHeading className={styles.title}>

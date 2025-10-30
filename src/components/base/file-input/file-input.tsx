@@ -35,7 +35,7 @@ export const FileInput: React.FC<FileInputProps> = ({
         }
 
         // @todo Исправить ошибку при повторном воде файла
-        onChange(files);
+        onChange(Array.from(files));
     };
 
     return (

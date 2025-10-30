@@ -12,9 +12,10 @@ import useArticleForm from './use-article-form';
 
 const CreateArticlePage = () => {
     const {
+        errors,
         file,
         isMutating,
-        onButtonClick,
+        onSubmit,
         control,
         handleSubmit,
         register,
@@ -26,19 +27,20 @@ const CreateArticlePage = () => {
             <PrimaryHeading className={`${style.header}`}>
                 Создать статью
             </PrimaryHeading>
-            <form className={`${style.form}`}>
+            <form className={`${style.form}`} onSubmit={handleSubmit(onSubmit)}>
                 <Input
                     id="title"
                     label="Заголовок"
                     {...register('title')}
                 />
+                {!!errors.title?.message && <span>{errors.title.message}</span>}
                 <Textarea
                     id="text"
                     label="Текст"
                     className={`${style.textarea}`}
                     {...register('text')}
                 />
-
+                {!!errors.text?.message && <span>{errors?.text.message}</span>}
                 <Controller
                     name="files"
                     control={control}
@@ -54,12 +56,11 @@ const CreateArticlePage = () => {
                 />
 
                 {file && <FilePreview file={file} onDelete={onDelete} />}
-
+                {!!errors.files?.message && <span>{errors?.files.message}</span>}
                 <ButtonPrimary
-                    type="button"
+                    type="submit"
                     isLoading={isMutating}
                     className={`${style.button}`}
-                    onClick={handleSubmit(onButtonClick)}
                 >
                     Отправить
                 </ButtonPrimary>
