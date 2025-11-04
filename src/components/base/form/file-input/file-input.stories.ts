@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs';
 import { FileInput } from './file-input';
 
 const meta = {
-    title: 'Input/FileInput',
+    title: 'Form/FileInput',
     component: FileInput,
     parameters: {
         layout: 'centered',

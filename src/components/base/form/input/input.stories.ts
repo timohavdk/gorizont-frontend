@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs';
 import { Input } from './input';
 
 const meta = {
-    title: 'Input/Input',
+    title: 'Form/Input',
     component: Input,
     parameters: {
         layout: 'centered',

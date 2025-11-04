@@ -5,9 +5,15 @@ import { useForm } from 'react-hook-form';
 import useCreateArticle from '@/hooks/api/articles/use-create-article';
 
 const schema = z.object({
-    title: z.string(),
-    text: z.string(),
-    files: z.file().array(),
+    title: z.string()
+        .min(1, { error: 'Обязательное поле' })
+        .max(100, { error: 'Заголовок должен быть меньше 100 символов' }),
+    text: z.string()
+        .min(1, { error: 'Обязательное поле' })
+        .max(5000, { error: 'Текст должен быть меньше 5000 символов' }),
+    file: z.file({ error: 'Обязательное поле' })
+        .max(1024 * 1024 * 20, { error: 'Файл слишком большой, максимальный размер 20 МБ' })
+        .mime(['image/jpeg', 'image/png'], { error: 'Неподходящий тип файла, допустимые типы файлов: png, jpeg' }),
 });
 
 type Article = z.infer<typeof schema>;
@@ -19,25 +25,21 @@ const useArticleForm = () => {
         control,
         watch,
         handleSubmit,
-        setValue,
+        resetField,
         register,
         formState: { errors },
     } = useForm<Article>({
         resolver: zodResolver(schema),
     });
 
-    const files = watch('files');
+    const file = watch('file');
 
-    const file = files?.length ? files[0] : null;
-
-    const onDelete = () => {
-        setValue('files', []);
-    };
+    const onDelete = () => resetField('file');
 
     const onSubmit = async (data: Article) => {
         const formData = new FormData();
 
-        const { text, title } = data;
+        const { text, title, file } = data;
 
         if (!file) {
             return;
@@ -57,8 +59,8 @@ const useArticleForm = () => {
     };
 
     return {
-        errors,
         file,
+        errors,
         isMutating,
         onSubmit,
         control,

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs';
 import { Textarea } from './textarea';
 
 const meta = {
-    title: 'Textarea/Textarea',
+    title: 'Form/Textarea',
     component: Textarea,
     parameters: {
         layout: 'centered',

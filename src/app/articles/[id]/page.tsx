@@ -15,13 +15,15 @@ const Page = () => {
                 {data?.title}
             </PrimaryHeading>
 
-            <Image
-                className={styles.image}
-                src={data?.image}
-                alt="тест"
-                width={200}
-                height={200}
-            />
+            {data?.image && (
+                <Image
+                    className={styles.image}
+                    src={data?.image}
+                    alt={data.text}
+                    width={1000}
+                    height={200}
+                />
+            )}
 
             <PrimaryText className={styles.text}>
                 {data?.text}

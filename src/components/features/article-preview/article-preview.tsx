@@ -19,8 +19,8 @@ export const ArticlePreview: React.FC<ArticlePreviewProps> = ({ className, ...pr
                 <Image
                     className={styles.image}
                     src={image}
-                    alt={text}
-                    width={200}
+                    alt={title}
+                    width={300}
                     height={200}
                 />
             )}
@@ -31,7 +31,7 @@ export const ArticlePreview: React.FC<ArticlePreviewProps> = ({ className, ...pr
                     </SecondaryHeading>
                 </Link>
 
-                <PrimaryText>
+                <PrimaryText className={styles.text}>
                     {text}
                 </PrimaryText>
             </div>
