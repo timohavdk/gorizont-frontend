@@ -29,11 +29,7 @@ const CreateArticlePage = () => {
                 Создать статью
             </PrimaryHeading>
             <form className={`${style.form}`} onSubmit={handleSubmit(onSubmit)}>
-                <Field
-                    slots={{
-                        error: errors.title?.message,
-                    }}
-                >
+                <Field slots={{ error: errors.title?.message }}>
                     <Input
                         id="title"
                         label="Заголовок"
@@ -41,11 +37,7 @@ const CreateArticlePage = () => {
                     />
                 </Field>
 
-                <Field
-                    slots={{
-                        error: errors.text?.message,
-                    }}
-                >
+                <Field slots={{ error: errors.text?.message }}>
                     <Textarea
                         id="text"
                         label="Текст"
@@ -54,11 +46,7 @@ const CreateArticlePage = () => {
                     />
                 </Field>
 
-                <Field
-                    slots={{
-                        error: errors?.file?.message,
-                    }}
-                >
+                <Field slots={{ error: errors?.file?.message }}>
                     <Controller
                         name="file"
                         control={control}
