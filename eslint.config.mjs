@@ -7,6 +7,7 @@ import stylistic from '@stylistic/eslint-plugin';
 import { defineConfig } from 'eslint/config';
 import importPlugin from 'eslint-plugin-import';
 import pluginReact from 'eslint-plugin-react';
+import unusedImports from 'eslint-plugin-unused-imports';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
@@ -38,7 +39,6 @@ export default defineConfig([
         files: ['**/*.json'],
         plugins: {
             json,
-
         },
         language: 'json/json',
         extends: ['json/recommended'],
@@ -70,11 +70,23 @@ export default defineConfig([
     }),
     {
         plugins: {
-            import: importPlugin,
+            'import': importPlugin,
+            'unused-imports': unusedImports,
         },
         rules: {
             'react/react-in-jsx-scope': 'off',
             'react/prop-types': 'off',
+            'no-unused-vars': 'off',
+            'unused-imports/no-unused-imports': 'error',
+            'unused-imports/no-unused-vars': [
+                'warn',
+                {
+                    vars: 'all',
+                    varsIgnorePattern: '^_',
+                    args: 'after-used',
+                    argsIgnorePattern: '^_',
+                },
+            ],
             'import/order': [
                 'error',
                 {

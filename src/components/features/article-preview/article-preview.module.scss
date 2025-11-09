@@ -1,4 +1,4 @@
-@use "@styles/variables" as vars;
+@use "@styles/variables" as *;
 
 .preview {
 	border-radius: var(--block-border-radius-10px);
@@ -7,7 +7,7 @@
 	display: flex;
 	gap: 10px;
 
-	@media (max-width: vars.$mobile-device-width) {
+	@media (max-width: $mobile-device-width) {
 		height: 150px;
 	}
 }
@@ -21,8 +21,23 @@
 	height: 100%;
 	object-fit: cover;
 	border-radius: var(--block-border-radius-8px) 0 0 var(--block-border-radius-8px);
+
+	@media (max-width: $mobile-device-width) {
+		width: 130px;
+	}
 }
 
 .container {
 	padding: 10px 10px 10px 0;
+}
+
+.text {
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 10;
+	-webkit-box-orient: vertical;
+
+	@media (max-width: $mobile-device-width) {
+		-webkit-line-clamp: 5;
+	}
 }

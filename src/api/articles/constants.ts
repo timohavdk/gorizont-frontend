@@ -1,1 +1,1 @@
-export const URL_ARTICLES = '/articles';
+export const ENDPOINT_ARTICLES = '/articles';

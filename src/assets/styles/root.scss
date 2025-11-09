@@ -17,6 +17,18 @@
     --gray-600: #36383c;
     --gray-700: #181a1c;
 
+
+    --red-100: #ffedec;
+    --red-200: #ffc7c4; 
+    --red-300: #fe8c85;
+    --red-400: #fe3b15;
+    --red-500: #bf2705;
+    --red-600: #821702;
+    --red-700: #4a0901;
+
     --text-primary: var(--gray-700);
-    --icon-primary: var(--gray-700);
+
+	--text-error: var(--red-400);
+
+	--icon-primary: var(--gray-700);
 }
