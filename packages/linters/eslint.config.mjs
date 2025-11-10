@@ -12,7 +12,13 @@ export default [
 		plugins: { js },
 		extends: ['js/recommended'],
 	},
-	tseslint.configs.recommended,
+	{
+		files: ['**/*.{ts,mts,cts,tsx}'],
+		extends: [...tseslint.configs.recommended],
+		languageOptions: {
+			parser: tseslint.parser,
+		},
+	},
 	{
 		files: ['**/*.json'],
 		plugins: {
@@ -33,13 +39,19 @@ export default [
 		language: 'markdown/gfm',
 		extends: ['markdown/recommended'],
 	},
-	stylistic.configs.customize({
-		indent: 4,
-		quotes: 'single',
-		semi: true,
-		jsx: true,
-		commaDangle: 'always-multiline',
-	}),
+	{
+		files: [
+			'**/*.js',
+			'**/*.ts',
+		],
+		...stylistic.configs.customize({
+			indent: 4,
+			quotes: 'single',
+			semi: true,
+			jsx: true,
+			commaDangle: 'always-multiline',
+		}),
+	},
 	{
 		plugins: {
 			'import': importPlugin,
@@ -58,5 +70,8 @@ export default [
 				},
 			],
 		},
+	},
+	{
+		ignores: ["package.json", "package-lock.json"]
 	},
 ];

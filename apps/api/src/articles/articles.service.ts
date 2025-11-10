@@ -36,6 +36,8 @@ export class ArticlesService {
 
         const fileId = await handleAsync(() => this.fileService.uploadFile(file, 'public', 'articles'));
 
+        console.log('fileId', fileId);
+
         if (!fileId) {
             return result;
         }
@@ -93,11 +95,10 @@ export class ArticlesService {
                         title,
                         image,
                     };
-                })
-
+                });
 
                 return filledArticles;
-            }
+            };
 
             return handleAsync<ArticleDto[]>(get, []);
         };
@@ -144,7 +145,7 @@ export class ArticlesService {
                     image,
                     id,
                 } as ArticleDto;
-            }
+            };
 
             return handleAsync(get, null);
         };

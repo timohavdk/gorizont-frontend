@@ -10,24 +10,24 @@ import {
 
 @Entity()
 export class Articles {
-  @PrimaryGeneratedColumn('uuid')
-      id: string;
+    @PrimaryGeneratedColumn('uuid')
+    id: string;
 
-  @Column('text')
-      title: string;
+    @Column('text')
+    title: string;
 
-  @Column('text')
-      text: string;
+    @Column('text')
+    text: string;
 
-  @Column('uuid')
-      imageId: string;
+    @Column('uuid')
+    imageId: string;
 
-  @CreateDateColumn()
-      created_at: Date;
+    @CreateDateColumn()
+    created_at: Date;
 
-  @UpdateDateColumn()
-      updated_at: Date;
+    @UpdateDateColumn()
+    updated_at: Date;
 
-  @DeleteDateColumn()
-      deletedDate: Date;
+    @DeleteDateColumn()
+    deletedDate: Date;
 }

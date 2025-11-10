@@ -55,8 +55,8 @@ export class ArticlesController {
                     new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 20 }),
                     new FileTypeValidator({ fileType: '^image\/(png|jpeg)$' }),
                 ],
-            })
-        ) file: Express.Multer.File
+            }),
+        ) file: Express.Multer.File,
     ) {
         return await this.articleService.create(createArticleDto, file);
     }

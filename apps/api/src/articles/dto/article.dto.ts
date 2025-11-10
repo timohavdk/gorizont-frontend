@@ -1,6 +1,6 @@
 /** Статья */
 export class ArticleDto {
-    /** Id*/
+    /** Id */
     id: string;
     /** Заголовок */
     title: string;
