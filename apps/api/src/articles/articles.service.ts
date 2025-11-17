@@ -1,7 +1,5 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable, Inject, NotFoundException, InternalServerErrorException } from '@nestjs/common';
 import { ArticleInterface } from './interfaces/article.interface';
-import { CreateArticleInterface } from './interfaces/create-article.interface';
-import { MutationResultArticleInterface } from './interfaces/mutation-result-article.interface';
 import { v4 as uuidv4 } from 'uuid';
 import { Articles } from './article.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -11,7 +9,8 @@ import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Cache } from 'cache-manager';
 import { DEFAULT_TTL } from 'src/cache/default-ttl';
 import { FilesService } from 'src/files/files.service';
-import { ArticleDto } from './dto/article.dto';
+import { ResultDeletedArticleDto, ResultEditedArticleDto, type ArticleDto, type ResultCreatedArticleDto } from 'schemas';
+import { CreateArticleDto } from './schemas';
 
 const ARTICLE_CACHE_KEY = 'articles';
 
@@ -26,21 +25,15 @@ export class ArticlesService {
         readonly fileService: FilesService,
     ) { }
 
-    async create(article: CreateArticleInterface, file: Express.Multer.File) {
-        const { text, title } = article;
+    async create(article: CreateArticleDto) {
+        const { text, title, file } = article;
 
-        const result = {
+        const result: ResultCreatedArticleDto = {
             id: null,
             result: false,
-        } as MutationResultArticleInterface;
+        };
 
-        const fileId = await handleAsync(() => this.fileService.uploadFile(file, 'public', 'articles'));
-
-        console.log('fileId', fileId);
-
-        if (!fileId) {
-            return result;
-        }
+        const fileId = await this.fileService.uploadFile(file, 'public', 'articles');
 
         const entity = this.articlesRepository.create({
             title,
@@ -67,45 +60,39 @@ export class ArticlesService {
     }
 
     async getAll() {
-        const getArticles = () => {
-            const get = async () => {
-                const articles = await this.articlesRepository.find({
-                    take: 10,
-                    withDeleted: true,
-                    order: {
-                        created_at: 'desc',
-                    },
-                });
+        const get = async () => {
+            const articles = await this.articlesRepository.find({
+                take: 10,
+                withDeleted: true,
+                order: {
+                    created_at: 'desc',
+                },
+            }).catch(() => {
+                throw new Error('Произошла ошибка при поиске статей');
+            });
 
-                if (!articles.length) {
-                    return [];
-                }
+            const data = articles.map(({ imageId }) => this.fileService.getFileUrl(imageId));
 
-                const data = articles.map(({ imageId }) => this.fileService.getFileUrl(imageId));
+            const imageIds = await Promise.allSettled(data);
 
-                const imageIds = await Promise.allSettled(data);
+            const filledArticles = articles.map((article, index) => {
+                const image = (imageIds[index].status === 'fulfilled' ? imageIds[index].value : null);
+                const { text, title, id } = article;
 
-                const filledArticles = articles.map((article, index) => {
-                    const image = (imageIds[index].status === 'fulfilled' ? imageIds[index].value : null);
-                    const { text, title, id } = article;
+                return {
+                    id,
+                    text,
+                    title,
+                    image,
+                };
+            });
 
-                    return {
-                        id,
-                        text,
-                        title,
-                        image,
-                    };
-                });
-
-                return filledArticles;
-            };
-
-            return handleAsync<ArticleDto[]>(get, []);
+            return filledArticles;
         };
 
         const articles = this.cacheManager.wrap(
             ARTICLE_CACHE_KEY,
-            getArticles,
+            get,
             DEFAULT_TTL,
         );
 
@@ -113,46 +100,44 @@ export class ArticlesService {
     }
 
     async getOne(id: string) {
-        const key = `${ARTICLE_CACHE_KEY}:${id}`;
-
-        const getArticle = (id: string) => {
-            const get = async () => {
-                const article = await this.articlesRepository.findOne({
-                    where: {
-                        id,
-                    },
-                });
-
-                if (!article) {
-                    return null;
-                }
-
-                const { imageId } = article;
-
-                let image = null;
-
-                if (imageId) {
-                    const url = await this.fileService.getFileUrl(imageId);
-
-                    image = url;
-                }
-
-                const { text, title } = article;
-
-                return {
-                    text,
-                    title,
-                    image,
+        const get = async (id: string) => {
+            const article = await this.articlesRepository.findOne({
+                where: {
                     id,
-                } as ArticleDto;
-            };
+                },
+            }).catch(() => {
+                throw new NotFoundException();
+            });
 
-            return handleAsync(get, null);
+            if (!article) {
+                return null;
+            }
+
+            const { imageId } = article;
+
+            let image = null;
+
+            if (imageId) {
+                const url = await this.fileService.getFileUrl(imageId);
+
+                image = url;
+            }
+
+            const { text, title } = article;
+
+            return {
+                text,
+                title,
+                image,
+                id,
+            } as ArticleDto;
         };
+
+        const key = `${ARTICLE_CACHE_KEY}:${id}`;
 
         const article = this.cacheManager.wrap(
             key,
-            () => getArticle(id),
+            () => get(id),
             DEFAULT_TTL,
         );
 
@@ -160,10 +145,10 @@ export class ArticlesService {
     }
 
     async update(updArticle: ArticleInterface) {
-        const result = {
+        const result: ResultEditedArticleDto = {
             id: null,
             result: true,
-        } as MutationResultArticleInterface;
+        };
 
         const oldArticle = await handleAsync(() =>
             this.articlesRepository.findOne({
@@ -193,30 +178,26 @@ export class ArticlesService {
     }
 
     async delete(id: string) {
-        const result = {
+        const result: ResultDeletedArticleDto = {
             id: null,
             result: true,
-        } as MutationResultArticleInterface;
+        };
 
-        const article = await handleAsync<Articles>(() =>
-            this.articlesRepository.findOne({
-                where: {
-                    id,
-                },
-            }),
-        );
+        const article = await this.articlesRepository.findOne({
+            where: {
+                id,
+            },
+        }).catch(() => {
+            throw new NotFoundException();
+        });
 
-        if (!article) {
-            return result;
-        }
+        const resultDeleted = await this.articlesRepository.softRemove(article).catch(() => {
+            throw new InternalServerErrorException();
+        });
 
-        const resultDeleted = await handleAsync<Articles>(() =>
-            this.articlesRepository.softRemove(article),
-        );
+        const { id: deletedId } = resultDeleted;
 
-        if (resultDeleted) {
-            result.id = resultDeleted.id;
-        }
+        result.id = deletedId;
 
         return result;
     }

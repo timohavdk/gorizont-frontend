@@ -1,3 +1,4 @@
+import {defineConfig} from 'eslint/config'
 import js from '@eslint/js';
 import json from '@eslint/json';
 import markdown from '@eslint/markdown';
@@ -6,15 +7,17 @@ import importPlugin from 'eslint-plugin-import';
 import unusedImports from 'eslint-plugin-unused-imports';
 import tseslint from 'typescript-eslint';
 
-export default [
+export default defineConfig([
+	js.configs.recommended,
+	tseslint.configs.recommended,
+	json.configs.recommended,
+	markdown.configs.recommended,
 	{
 		files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
 		plugins: { js },
-		extends: ['js/recommended'],
 	},
 	{
 		files: ['**/*.{ts,mts,cts,tsx}'],
-		extends: [...tseslint.configs.recommended],
 		languageOptions: {
 			parser: tseslint.parser,
 		},
@@ -25,19 +28,16 @@ export default [
 			json,
 		},
 		language: 'json/json',
-		extends: ['json/recommended'],
 	},
 	{
 		files: ['**/*.jsonc'],
 		plugins: { json },
 		language: 'json/jsonc',
-		extends: ['json/recommended'],
 	},
 	{
 		files: ['**/*.md'],
 		plugins: { markdown },
 		language: 'markdown/gfm',
-		extends: ['markdown/recommended'],
 	},
 	{
 		files: [
@@ -74,4 +74,4 @@ export default [
 	{
 		ignores: ["package.json", "package-lock.json"]
 	},
-];
+]);

@@ -1,0 +1,1 @@
+{"version":3,"file":"article-dto.d.ts","sourceRoot":"","sources":["../../../src/endpoints/articles/article-dto.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,CAAC,EAAE,MAAM,KAAK,CAAC;AAExB,mBAAmB;AACnB,QAAA,MAAM,UAAU;;;;;iBASd,CAAC;AAEH,aAAa;AACb,KAAK,UAAU,GAAG,CAAC,CAAC,KAAK,CAAC,OAAO,UAAU,CAAC,CAAC;AAE7C,OAAO,EACH,UAAU,EACV,KAAK,UAAU,GAClB,CAAC"}

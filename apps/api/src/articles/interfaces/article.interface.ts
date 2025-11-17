@@ -1,6 +1,6 @@
 /** Статья */
 export class ArticleInterface {
-    /** Id*/
+    /** Id */
     id: string;
     /** Заголовок */
     title: string;
