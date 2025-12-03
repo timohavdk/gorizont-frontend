@@ -1,4 +1,5 @@
-import { ArticleDto } from 'schemas';
+import { type ArticleDto, articleDto } from 'schemas';
+import createValidation from '@/api/utils/create-validation';
 import apiClient from '../api-client';
 import { ENDPOINT_ARTICLES } from './constants';
 
@@ -7,9 +8,13 @@ const getArticle = async (keys: [string, string]) => {
 
     const endpoint = `${ENDPOINT_ARTICLES}/${id}`;
 
-    const result = await apiClient.get<ArticleDto>(endpoint);
+    const validation = createValidation<ArticleDto>(articleDto, endpoint);
 
-    return result.data;
+    const result = await apiClient.get<ArticleDto>(endpoint)
+        .then(({ data }) => data)
+        .then(validation);
+
+    return result;
 };
 
 export default getArticle;

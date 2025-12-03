@@ -1,22 +1,21 @@
 import css from '@eslint/css';
-import { FlatCompat } from '@eslint/eslintrc';
-import { defineConfig } from 'eslint/config';
+import { defineConfig, globalIgnores } from 'eslint/config';
 import importPlugin from 'eslint-plugin-import';
-import pluginReact from 'eslint-plugin-react';
 import globals from 'globals';
 import commonConfig from 'linters';
-
-const compat = new FlatCompat({
-    baseDirectory: import.meta.dirname,
-});
+import nextVitals from 'eslint-config-next/core-web-vitals';
 
 export default defineConfig([
     ...commonConfig,
-    ...compat.config({
-        extends: ['next/core-web-vitals'],
-    }),
+    ...nextVitals,
+    globalIgnores([
+      '.next/**',
+      'out/**',
+      'build/**',
+      'next-env.d.ts',
+    ]),
     {
-        files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+        files: ['src/**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
         languageOptions: {
             globals: {
                 ...globals.browser,
@@ -24,7 +23,6 @@ export default defineConfig([
             },
         },
     },
-    pluginReact.configs.flat.recommended,
     {
         files: ['**/*.css'],
         plugins: { css },

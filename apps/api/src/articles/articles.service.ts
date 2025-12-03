@@ -144,6 +144,7 @@ export class ArticlesService {
         return article;
     }
 
+    /** @todo Добавить контракт */
     async update(updArticle: ArticleInterface) {
         const result: ResultEditedArticleDto = {
             id: null,
@@ -177,6 +178,7 @@ export class ArticlesService {
         return result;
     }
 
+    /** @todo Добавить контракт */
     async delete(id: string) {
         const result: ResultDeletedArticleDto = {
             id: null,

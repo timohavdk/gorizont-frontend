@@ -1,14 +1,15 @@
+import { resultCreatedArticleDtoShema, type ResultCreatedArticleDto } from 'schemas';
 import apiClient from '../api-client';
-
-type MutationArticleResult = {
-    id: string | null;
-    result: boolean;
-};
+import createValidation from '../utils/create-validation';
 
 const createArticle = async (url: string, { arg }: { arg: FormData }) => {
-    const result = await apiClient.post<MutationArticleResult>(url, arg);
+    const validation = createValidation<ResultCreatedArticleDto>(resultCreatedArticleDtoShema, url);
 
-    return result.data;
+    const result = await apiClient.post(url, arg)
+        .then(({ data }) => data)
+        .then(validation);
+
+    return result;
 };
 
 export default createArticle;
