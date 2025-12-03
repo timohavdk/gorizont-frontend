@@ -1,5 +1,7 @@
 import { ZodType } from 'zod';
 
+/** Тип любого объекта */
+/* eslint-disable-next-line */
 const createValidation = <TData>(schema: ZodType, endpoint: string) => (data: Record<string, any>) => {
     const result = schema.safeParse(data);
 

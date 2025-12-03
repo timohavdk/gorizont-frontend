@@ -1,7 +1,7 @@
 import { createContext } from 'react';
-import { Article } from '@/api/articles/get-articles';
+import { type ArticleDto } from 'schemas';
 
-export const ArticlePreviewContext = createContext<Article>({
+export const ArticlePreviewContext = createContext<ArticleDto>({
     id: '',
     title: '',
     text: '',

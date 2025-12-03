@@ -23,5 +23,8 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
     args: {
         label: 'Input Label',
+        onChange: (files: File[]) => {
+            console.log(files);
+        },
     },
 };

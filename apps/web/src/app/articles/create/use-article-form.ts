@@ -1,7 +1,7 @@
 import z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { redirect, RedirectType } from 'next/navigation';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { clientFileSchema, createArticleSchema as baseSchema } from 'schemas';
 import useCreateArticle from '@/hooks/api/articles/use-create-article';
 
@@ -14,7 +14,6 @@ const useArticleForm = () => {
 
     const {
         control,
-        watch,
         handleSubmit,
         resetField,
         register,
@@ -23,7 +22,7 @@ const useArticleForm = () => {
         resolver: zodResolver(schema),
     });
 
-    const file = watch('file');
+    const file = useWatch<Article, 'file'>({ control, name: 'file' });
 
     const onDelete = () => resetField('file');
 
@@ -55,7 +54,6 @@ const useArticleForm = () => {
         isMutating,
         onSubmit,
         control,
-        watch,
         handleSubmit,
         register,
         onDelete,
