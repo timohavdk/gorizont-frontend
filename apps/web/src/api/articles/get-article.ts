@@ -1,6 +1,7 @@
 import { type ArticleDto, articleDto } from 'schemas';
 import createValidation from '@/api/utils/create-validation';
 import apiClient from '../api-client';
+import handleRequest from '../utils/handle-request';
 import { ENDPOINT_ARTICLES } from './constants';
 
 const getArticle = async (keys: [string, string]) => {
@@ -10,9 +11,9 @@ const getArticle = async (keys: [string, string]) => {
 
     const validation = createValidation<ArticleDto>(articleDto, endpoint);
 
-    const result = await apiClient.get<ArticleDto>(endpoint)
-        .then(({ data }) => data)
-        .then(validation);
+    const request = () => apiClient.get<ArticleDto>(endpoint);
+
+    const result = await handleRequest(request).then(validation);
 
     return result;
 };
