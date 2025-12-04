@@ -1,0 +1,33 @@
+{
+	"name": "schemas",
+	"version": "1.0.0",
+	"description": "",
+	"type": "module",
+	"types": "./dist/index.d.ts",
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.mjs",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"require": "./dist/index.cjs",
+			"import": "./dist/index.js"
+		}
+	},
+	"scripts": {
+		"build": "tsup src/index.ts --format cjs,esm --clean && tsc -p tsconfig.json",
+		"lint:fix": "eslint ./src --fix"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"packageManager": "pnpm@10.20.0",
+	"dependencies": {
+		"eslint": "^9.39.1",
+		"linters": "workspace:*",
+		"tsup": "^8.5.1",
+		"typescript": "^5.9.3"
+	},
+	"peerDependencies": {
+		"zod": "^4.1.12"
+	}
+}
